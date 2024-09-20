@@ -9,6 +9,7 @@ function (Controller, JSONModel) {
         onInit: function () {
              this.getView().setModel(new JSONModel(), "Data");
         },
+        
         onListItemPress: function(oEvent){
             var oSelectedOrder = oEvent.getParameter("listItem").getBindingContext().getObject();
             var sPath = `/Customers(CustomerID='${oSelectedOrder.CustomerID}')`
