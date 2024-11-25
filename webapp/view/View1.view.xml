@@ -1,67 +1,194 @@
 <mvc:View controllerName="sample.app.zmasterdetail.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns:layout="sap.ui.layout"
+	xmlns:uxap="sap.uxap"
 	xmlns:f="sap.ui.layout.form"
-    xmlns:core="sap.ui.core"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-       <SplitApp
-		id="SplitAppDemo"
-		initialDetail="detail"
-		initialMaster="master">
-		<detailPages>
-			<Page
-				id="detail2"
-				title="Customer details"
-				backgroundDesign= "Solid"
-				showNavButton="false"
-				navButtonPress=".onPressDetailBack">
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Page id="page" showHeader="false" title="">
+		<SplitApp id="SplitAppDemo" initialDetail="detail" initialMaster="master">
+			<detailPages>
+				<Page id="detail2" title="Customer details" showHeader="false" backgroundDesign= "Solid" showNavButton="false" navButtonPress=".onPressDetailBack">
+					<!-- <content>	 -->
+
+					<uxap:ObjectPageLayout 	useIconTabBar="true"
+	 id="ObjectPageLayout" enableLazyLoading="true" beforeNavigate="onBeforeNavigate"  upperCaseAnchorBar="false" sectionChange="onSectionChange">
+						
+							<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:expandedHeading>
+					<Title text="{Data>/emp/TitleOfCourtesy} {Data>/emp/FirstName} {Data>/emp/LastName}"></Title>
+				</uxap:expandedHeading>
+
+				<uxap:snappedHeading>
+					<FlexBox fitContainer="true" alignItems="Center">
+										<Avatar class="sapUiSmallMarginEnd" src="https://sapui5.hana.ondemand.com/test-resources/sap/uxap/images/imageID_275314.png" displaySize="L" />
+					<Text text="{Data>/emp/TitleOfCourtesy} {Data>/emp/FirstName} {Data>/emp/LastName}"></Text>
+
+					</FlexBox>
+				</uxap:snappedHeading>
+
+				<!-- <uxap:expandedContent>
+					<FlexBox fitContainer="true" alignItems="Center">
+										<Avatar class="sapUiSmallMarginEnd" src="https://sapui5.hana.ondemand.com/test-resources/sap/uxap/images/imageID_275314.png" displaySize="L" />
+					<Text text="{Data>/emp/TitleOfCourtesy} {Data>/emp/FirstName} {Data>/emp/LastName}"></Text>
+
+					</FlexBox>
+				</uxap:expandedContent> -->
+
 				
-					<f:SimpleForm id="SimpleFormDisplay354"
-			editable="false"
-			layout="ResponsiveGridLayout"
-			labelSpanXL="3"
-			labelSpanL="3"
-			labelSpanM="3"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="4"
-			emptySpanL="4"
-			emptySpanM="4"
-			emptySpanS="0"
-			columnsXL="1"
-			columnsL="1"
-			columnsM="1"
-			singleContainerFullSize="false" >
-			<f:content>
-				<Label text="Name" />
-				<Text id="nameText" text="{Data>/details/ContactName}" />
-				<Label text="Street/No." />
-				<Text text="{Data>/details/Address}" />
-				<Label text="ZIP Code/City" />
-				<Text text="{Data>/details/PostalCode} {Data>/details/City}" />
-				<Label text="Country" />
-				<Text id="countryText" text="{Data>/details/Country}" />
-			</f:content>
-		</f:SimpleForm>
-			</Page>
-		</detailPages>
-		<masterPages>
-			<Page
-				id="master2"
-				title="Orders"
-				backgroundDesign="List"
-				showNavButton="false"
-                
-				
-				navButtonPress=".onPressMasterBack">
-				<List items="{/Orders}" itemPress=".onListItemPress">
-					<items>
-						<StandardListItem description="{CustomerID}" title="{OrderID}" type="Active"  />
-					</items>
-				</List>
-			</Page>
-		</masterPages>
-	</SplitApp>
-    </Page>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+						<uxap:headerContent>
+			<FlexBox wrap="Wrap" fitContainer="true">
+				<Avatar class="sapUiSmallMarginEnd" src="https://sapui5.hana.ondemand.com/test-resources/sap/uxap/images/imageID_275314.png" displaySize="L" />
+<layout:HorizontalLayout >
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<ObjectAttribute title="Employe ID" text="{Data>/emp/EmployeeID}"></ObjectAttribute>
+
+					<ObjectAttribute title="Name" text="{Data>/emp/TitleOfCourtesy} {Data>/emp/FirstName} {Data>/emp/LastName}"></ObjectAttribute>
+					<ObjectAttribute title="Role" text="{Data>/emp/Title}"></ObjectAttribute>
+
+				</layout:VerticalLayout>
+
+				<layout:VerticalLayout class="">
+
+					<ObjectAttribute title="City/postal code" text="{Data>/emp/City} {Data>/emp/PostalCode}"></ObjectAttribute>
+					<ObjectAttribute title="Country" text="{Data>/emp/Country}"></ObjectAttribute>
+					<ObjectAttribute  title="Home Phone" text="{Data>/emp/HomePhone}"></ObjectAttribute>
+
+
+				</layout:VerticalLayout>
+				</layout:HorizontalLayout>
+
+				<!-- <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+					<Image src="./test-resources/sap/uxap/images/linkedin.png"/>
+					<Image src="./test-resources/sap/uxap/images/Twitter.png" class="sapUiSmallMarginBegin"/>
+			    </layout:HorizontalLayout> -->
+			</FlexBox>
+		</uxap:headerContent>
+
+						<uxap:sections>
+							<uxap:ObjectPageSection titleUppercase="false" id="goals" title="Customer Details">
+								<uxap:subSections>
+									<uxap:ObjectPageSubSection id="goalsSS1" titleUppercase="false">
+										<uxap:blocks>
+											<Panel >
+												<headerToolbar>
+													<OverflowToolbar>
+														<Title text="Customer Details"/>
+													</OverflowToolbar>
+												</headerToolbar>
+												<f:SimpleForm id="SimpleFormDisplay354" editable="false" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+													<f:content>
+														<Label text="Name" />
+														<Text id="nameText" text="{Data>/details/ContactName}" />
+														<Label text="Street/No." />
+														<Text text="{Data>/details/Address}" />
+														<Label text="ZIP Code/City" />
+														<Text text="{Data>/details/PostalCode} {Data>/details/City}" />
+														<Label text="Country" />
+														<Text id="countryText" text="{Data>/details/Country}" />
+													</f:content>
+												</f:SimpleForm>
+											</Panel>
+											
+										</uxap:blocks>
+									</uxap:ObjectPageSubSection>
+								</uxap:subSections>
+							</uxap:ObjectPageSection>
+
+							<uxap:ObjectPageSection titleUppercase="false" id="orders" title="Orders">
+								<uxap:subSections>
+									<uxap:ObjectPageSubSection id="Orders144" titleUppercase="false">
+										<uxap:blocks>
+										<Panel >
+												<headerToolbar>
+													<OverflowToolbar>
+														<Title id="sProdcutTitle" text="Orders (0)"/>
+													</OverflowToolbar>
+												</headerToolbar>
+												<content>
+
+													<Table sticky="ColumnHeaders" id="idProductsTable" inset="false" items="{
+			path: 'Data>/Orders'}">
+														
+
+														<columns>
+															<Column>
+																<Text text="Order ID" />
+															</Column>
+															<Column width="8rem">
+																<Text text="Order Date" />
+															</Column>
+															<Column width="8rem">
+																<Text text="Required Date" />
+															</Column>
+															<Column width="8rem">
+																<Text text="Shipped Date" />
+															</Column>
+															<Column width="8rem">
+																<Text text="Freight" />
+															</Column>
+															<Column width="6rem">
+																<Text text="Ship Name" />
+															</Column>
+															<Column width="8rem">
+																<Text text="Shipping Address" />
+															</Column>
+															<Column width="6rem">
+																<Text text="Ship City" />
+															</Column>
+															<Column width="6rem">
+																<Text text="Shipping Country" />
+															</Column>
+
+
+														</columns>
+														<items>
+															<ColumnListItem vAlign="Middle">
+																<cells>
+																	<Text text="{Data>OrderID}" />
+																	<Text text ="{path:'Data>OrderDate', type:'sap.ui.model.type.Date', formatOptions : { style:'medium', UTC: true}}"/>
+																	<Text text ="{path:'Data>RequiredDate', type:'sap.ui.model.type.Date', formatOptions : { style:'medium', UTC: true}}"/>
+
+																	<Text text ="{path:'Data>ShippedDate', type:'sap.ui.model.type.Date', formatOptions : { style:'medium', UTC: true}}"/>
+
+																	<Text text="{Data>Freight}" />
+																	<Text text="{Data>ShipName}" />
+																	<Text text="{Data>ShipAddress}" />
+
+																	<Text text="{Data>ShipCity}" />
+
+																	<Text text="{Data>ShipCountry}" />
+
+
+																</cells>
+															</ColumnListItem>
+														</items>
+													</Table>
+												</content>
+											</Panel>
+</uxap:blocks>
+									</uxap:ObjectPageSubSection>
+								</uxap:subSections>
+							</uxap:ObjectPageSection>
+						</uxap:sections>
+					</uxap:ObjectPageLayout>
+
+
+					<!-- </content> -->
+				</Page>
+			</detailPages>
+			<masterPages>
+				<Page id="master2" title="Customers" backgroundDesign="List" showNavButton="false" navButtonPress=".onPressMasterBack">
+					<List items="{/Customers}" updateFinished="onCustomerListUpdateFinished" itemPress=".onListItemPress">
+						<items>
+							<StandardListItem description="{CustomerID}" title="{ContactName}" type="Active" />
+						</items>
+					</List>
+				</Page>
+			</masterPages>
+		</SplitApp>
+	</Page>
 </mvc:View>
